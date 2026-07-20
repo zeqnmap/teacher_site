@@ -5,6 +5,9 @@ from email.message import EmailMessage
 import re
 import html
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Инициализируем приложение. Указываем папки для статики и шаблонов
 app = Flask(__name__, static_folder='static', template_folder='templates')
@@ -15,8 +18,8 @@ CORS(app)
 # ==============================================================
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-MY_EMAIL = "----@gmail.com"
-MY_PASSWORD = "----"
+MY_EMAIL = os.getenv("MY_EMAIL")
+MY_PASSWORD = os.getenv("MY_PASSWORD")
 
 
 def is_valid_email(email):
