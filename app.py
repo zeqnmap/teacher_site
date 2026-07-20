@@ -15,8 +15,8 @@ CORS(app)
 # ==============================================================
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-MY_EMAIL = "zeqnmap@gmail.com"
-MY_PASSWORD = "gcgcjqujstjypybj"
+MY_EMAIL = "----@gmail.com"
+MY_PASSWORD = "----"
 
 
 def is_valid_email(email):
