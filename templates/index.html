@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Tutor | Профессиональный репетитор</title>
+    <style>
+        /* =========================================
+           Оливковая палитра (Спокойствие, рост, премиум)
+           ========================================= */
+        :root {
+            --bg-main: #eff2e8;
+            --bg-card: #ffffff;
+            --primary: #687b3e;
+            --primary-gradient: linear-gradient(135deg, #687b3e 0%, #8a9e59 100%);
+            --text-dark: #2c3322;
+            --text-muted: #737a66;
+
+            /* Эффект матового стекла (Сделан более прозрачным) */
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.5);
+
+            --shadow-soft: 0 10px 30px rgba(104, 123, 62, 0.1);
+            --shadow-hover: 0 20px 40px rgba(104, 123, 62, 0.2);
+            --shadow-btn: 0 8px 20px rgba(104, 123, 62, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image:
+                radial-gradient(at 0% 0%, rgba(104, 123, 62, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(138, 158, 89, 0.15) 0px, transparent 50%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .primary-text {
+            color: var(--primary); /* Твой оливковый акцент */
+            font-weight: 900;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* =========================================
+           ИДЕАЛЬНАЯ ШАПКА (Матовое стекло + Свайп)
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            background: var(--glass-bg);
+            /* Усиленное размытие для красивого эффекта стекла */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(104, 123, 62, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            /* Позволяем скроллить меню на телефонах */
+            overflow-x: auto;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Прячем полосу прокрутки в меню */
+        nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin: 0 15px;
+            /* ЗАПРЕЩАЕМ перенос слов. Теперь каши не будет! */
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Главный экран */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 20px 20px;
+            gap: 50px;
+        }
+
+        .hero-image {
+            flex: 0 0 380px;
+            height: 480px;
+            background-color: var(--bg-card);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid white;
+            box-shadow: var(--shadow-soft);
+            background-image: url('/static/images/photo.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            color: var(--text-dark);
+            font-weight: 800;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* Секции */
+        .education, .story-section, .reviews, .contact {
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .education h2, .story-section h2, .reviews h2, .contact h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+
+        /* Секция образования */
+        .diplomas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .diploma-card {
+            background: var(--bg-card);
+            height: 260px;
+            border-radius: 20px;
+            border: 1px solid rgba(104, 123, 62, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .diploma-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .diploma-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        /* История и Условия */
+        .story-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .story-card {
+            background: var(--bg-card);
+            flex: 1;
+            min-width: 320px;
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(104, 123, 62, 0.15);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .story-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .story-card p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .story-card ul {
+            color: var(--text-muted);
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.05rem;
+        }
+
+        .story-card ul li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .story-card ul li::before {
+            content: '✓';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* ОТЗЫВЫ (БЕСКОНЕЧНАЯ ЛЕНТА) */
+        .reviews {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 25px;
+            animation: scroll-marquee 40s linear infinite;
+        }
+
+        .marquee-container:hover .marquee-track,
+        .marquee-container:active .marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 12.5px)); }
+        }
+
+        .review-img {
+            height: 350px;
+            width: auto;
+            border-radius: 16px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(104, 123, 62, 0.15);
+            object-fit: contain;
+            background-color: var(--bg-card);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .review-img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Контакты */
+        .contact {
+            max-width: 800px;
+            margin-bottom: 100px;
+        }
+
+        .buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: var(--primary-gradient);
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Разделитель "ИЛИ" */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .divider span:not(.text) {
+            height: 1px;
+            background: rgba(104, 123, 62, 0.2);
+            flex: 1;
+            max-width: 150px;
+        }
+
+        .divider .text {
+            margin: 0 15px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Форма обратной связи */
+        .email-form {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(104, 123, 62, 0.15);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .email-form input, .email-form textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(104, 123, 62, 0.2);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+
+        .email-form input::placeholder, .email-form textarea::placeholder {
+            color: #9ca38f;
+        }
+
+        .email-form input:focus, .email-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(104, 123, 62, 0.1);
+        }
+
+        .email-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* =========================================
+           АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Меню: прижимаем к левому краю, чтобы было видно, что можно свайпать */
+            nav {
+                justify-content: flex-start;
+                padding: 0 15px;
+            }
+
+            nav a {
+                margin: 0 15px 0 0;
+                font-size: 0.95rem;
+            }
+
+            nav a:last-child {
+                margin-right: 20px; /* Отступ в самом конце свайпа */
+            }
+
+            h1 { font-size: 2.5rem; }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 100px;
+                gap: 30px;
+            }
+            .hero-image {
+                flex: 0 0 300px;
+                width: 300px;
+                height: 380px;
+            }
+            .diplomas-grid {
+                grid-template-columns: 1fr;
+            }
+            .story-container {
+                flex-direction: column;
+            }
+            .email-form { padding: 30px; }
+            .review-img { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#about">Обо мне</a>
+            <a href="#education">Образование</a>
+            <a href="#rules">Условия</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
+
+        <section class="hero" id="about">
+        <div class="hero-image"></div>
+        <div class="hero-text">
+            <h1>Заговори на <span class="primary-text">Английском</span><br> свободно</h1>
+            <h2>Привет! Я твой репетитор. Бла бла бла (Твое уникальное предложение: помогу преодолеть языковой барьер, подготовлю к экзаменам, сделаю английский частью твоей жизни).</h2>
+            <a href="#contact" class="btn">Записаться на урок</a>
+        </div>
+    </section>
+
+    <section class="education" id="education">
+        <h2>Моя Квалификация</h2>
+        <p class="section-subtitle">Я постоянно совершенствую свои навыки, чтобы давать вам самые актуальные и эффективные знания.</p>
+
+        <div class="diplomas-grid">
+            <div class="diploma-card">
+                <img src="/static/images/diploma1.jpg" alt="Диплом 1">
+            </div>
+            <div class="diploma-card">
+                <img src="/static/images/diploma2.jpg" alt="Диплом 2">
+            </div>
+            <div class="diploma-card">
+                <img src="/static/images/diploma3.jpg" alt="Диплом 3">
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section" id="rules">
+        <h2>Мой подход и условия</h2>
+        <p class="section-subtitle">Всё прозрачно и нацелено на ваш результат.</p>
+
+        <div class="story-container">
+            <div class="story-card">
+                <h3>Как проходят уроки</h3>
+                <p>Когда-то я сама знала всю грамматику на отлично, но впадала в ступор, когда нужно было заговорить. Стандартные методы заставляли зубрить, но не учили <strong>общаться</strong>.</p>
+                <p>Поэтому на моих уроках мы разрушаем языковой барьер с первого занятия. Мы обсуждаем современные темы, смотрим видео и делаем английский частью вашей жизни.</p>
+            </div>
+
+            <div class="story-card">
+                <h3>Формат занятий и оплата</h3>
+                <ul>
+                    <li><strong>Пробный урок:</strong> 30 минут со скидкой 50%. Знакомимся, определяем ваш уровень и ставим цель.</li>
+                    <li><strong>Система абонементов:</strong> Оплата производится блоками по 4, 8 или 12 занятий. Чем больше пакет, тем выгоднее.</li>
+                    <li><strong>Гибкие отмены:</strong> Занятие можно перенести без потери средств, если предупредить за 12 часов до начала.</li>
+                    <li><strong>Всё включено:</strong> Платформа и авторские материалы уже входят в стоимость.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+        <h2>Отзывы учеников</h2>
+        <p class="section-subtitle">Результаты тех, кто уже преодолел языковой барьер.</p>
+
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <!-- ПЕРВЫЙ БЛОК -->
+                <img src="/static/images/review1.jpg" alt="Отзыв 1" class="review-img">
+                <img src="/static/images/review2.jpg" alt="Отзыв 2" class="review-img">
+                <img src="/static/images/review3.jpg" alt="Отзыв 3" class="review-img">
+                <img src="/static/images/review4.jpg" alt="Отзыв 4" class="review-img">
+                <img src="/static/images/review5.jpg" alt="Отзыв 5" class="review-img">
+                <img src="/static/images/review6.jpg" alt="Отзыв 6" class="review-img">
+                <img src="/static/images/review7.jpg" alt="Отзыв 7" class="review-img">
+                <img src="/static/images/review8.jpg" alt="Отзыв 8" class="review-img">
+                <img src="/static/images/review9.jpg" alt="Отзыв 9" class="review-img">
+                <img src="/static/images/review10.jpg" alt="Отзыв 10" class="review-img">
+                <img src="/static/images/review11.jpg" alt="Отзыв 11" class="review-img">
+                <img src="/static/images/review12.jpg" alt="Отзыв 12" class="review-img">
+                <img src="/static/images/review13.jpg" alt="Отзыв 13" class="review-img">
+                <img src="/static/images/review14.jpg" alt="Отзыв 14" class="review-img">
+                <img src="/static/images/review15.jpg" alt="Отзыв 15" class="review-img">
+
+                <!-- ДУБЛИКАТ БЛОКА -->
+                <img src="/static/images/review1.jpg" alt="Отзыв 1" class="review-img">
+                <img src="/static/images/review2.jpg" alt="Отзыв 2" class="review-img">
+                <img src="/static/images/review3.jpg" alt="Отзыв 3" class="review-img">
+                <img src="/static/images/review4.jpg" alt="Отзыв 4" class="review-img">
+                <img src="/static/images/review5.jpg" alt="Отзыв 5" class="review-img">
+                <img src="/static/images/review6.jpg" alt="Отзыв 6" class="review-img">
+                <img src="/static/images/review7.jpg" alt="Отзыв 7" class="review-img">
+                <img src="/static/images/review8.jpg" alt="Отзыв 8" class="review-img">
+                <img src="/static/images/review9.jpg" alt="Отзыв 9" class="review-img">
+                <img src="/static/images/review10.jpg" alt="Отзыв 10" class="review-img">
+                <img src="/static/images/review11.jpg" alt="Отзыв 11" class="review-img">
+                <img src="/static/images/review12.jpg" alt="Отзыв 12" class="review-img">
+                <img src="/static/images/review13.jpg" alt="Отзыв 13" class="review-img">
+                <img src="/static/images/review14.jpg" alt="Отзыв 14" class="review-img">
+                <img src="/static/images/review15.jpg" alt="Отзыв 15" class="review-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Свяжитесь со мной</h2>
+        <p class="section-subtitle" style="margin-bottom: 25px;">
+            Выберите любой удобный способ: напишите в мессенджер или оставьте заявку прямо здесь. <strong>Они абсолютно равноценны — я отвечаю везде одинаково быстро!</strong>
+        </p>
+
+        <div class="buttons-group">
+            <a href="https://t.me/Irina_mnk7" target="_blank" class="btn">Написать в Telegram</a>
+            <a href="viber://chat?number=%2B375295091568" target="_blank" class="btn">Написать в Viber</a>
+        </div>
+
+        <div class="divider">
+            <span></span>
+            <span class="text">Или через почту</span>
+            <span></span>
+        </div>
+
+        <form class="email-form" id="contactForm">
+            <input type="text" id="name" placeholder="Ваше имя" required>
+            <input type="tel" id="phone" placeholder="Ваш номер телефона" required>
+            <input type="email" id="email" placeholder="Ваш Email" required>
+            <textarea id="message" placeholder="Какой у вас уровень английского и главная цель?" required></textarea>
+            <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+            <p id="statusMessage" style="display: none; margin-top: 15px; font-weight: bold; text-align: center;"></p>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusMessage = document.getElementById('statusMessage');
+            const btn = e.target.querySelector('button');
+
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            btn.textContent = 'Отправка...';
+            btn.style.opacity = '0.7';
+
+            try {
+                const response = await fetch('/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    statusMessage.style.display = 'block';
+                    statusMessage.style.color = '#687b3e';
+                    statusMessage.textContent = 'Заявка успешно отправлена! Я скоро с вами свяжусь.';
+                    e.target.reset();
+                } else {
+                    throw new Error('Ошибка сервера');
+                }
+            } catch (error) {
+                statusMessage.style.display = 'block';
+                statusMessage.style.color = '#ef4444';
+                statusMessage.textContent = 'Произошла ошибка связи. Пожалуйста, напишите мне в Telegram.';
+            } finally {
+                btn.textContent = 'Отправить заявку';
+                btn.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>
