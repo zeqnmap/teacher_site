@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Tutor | Профессиональный репетитор</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =========================================
            Оливковая палитра (Спокойствие, рост, премиум)
@@ -16,7 +17,7 @@
             --text-dark: #2c3322;
             --text-muted: #737a66;
 
-            /* Эффект матового стекла (Сделан более прозрачным) */
+            /* Эффект матового стекла */
             --glass-bg: rgba(255, 255, 255, 0.65);
             --glass-border: rgba(255, 255, 255, 0.5);
 
@@ -44,7 +45,7 @@
         }
 
         .primary-text {
-            color: var(--primary); /* Твой оливковый акцент */
+            color: var(--primary);
             font-weight: 900;
         }
 
@@ -52,16 +53,13 @@
             scroll-margin-top: 80px;
         }
 
-        /* =========================================
-           ИДЕАЛЬНАЯ ШАПКА (Матовое стекло + Свайп)
-           ========================================= */
+        /* Шапка */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             height: 70px;
             background: var(--glass-bg);
-            /* Усиленное размытие для красивого эффекта стекла */
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(104, 123, 62, 0.1);
@@ -79,13 +77,11 @@
             width: 100%;
             max-width: 1200px;
             padding: 0 20px;
-            /* Позволяем скроллить меню на телефонах */
             overflow-x: auto;
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        /* Прячем полосу прокрутки в меню */
         nav::-webkit-scrollbar {
             display: none;
         }
@@ -95,7 +91,6 @@
             color: var(--text-dark);
             font-weight: 600;
             margin: 0 15px;
-            /* ЗАПРЕЩАЕМ перенос слов. Теперь каши не будет! */
             white-space: nowrap;
             transition: color 0.3s ease;
             position: relative;
@@ -192,7 +187,7 @@
             margin: 0 auto 35px;
         }
 
-        /* Секция образования */
+        /* Образование */
         .diplomas-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -285,7 +280,7 @@
             font-size: 1.2rem;
         }
 
-        /* ОТЗЫВЫ (БЕСКОНЕЧНАЯ ЛЕНТА) */
+        /* Отзывы */
         .reviews {
             max-width: 100%;
             overflow: hidden;
@@ -337,19 +332,85 @@
 
         /* Контакты */
         .contact {
-            max-width: 800px;
-            margin-bottom: 100px;
+            max-width: 850px;
+            margin-bottom: 60px;
         }
 
         .buttons-group {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
-        /* Кнопки */
+        /* =========================================
+           ПРЕМИАЛЬНЫЕ КНОПКИ МЕССЕНДЖЕРОВ С ИКОНКАМИ
+           ========================================= */
+        .btn-messenger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 15px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-messenger svg {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;    /* Жестко фиксируем ширину */
+            min-height: 22px;   /* Жестко фиксируем высоту */
+            flex-shrink: 0;     /* Запрещаем браузеру сплющивать иконку */
+            fill: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+
+        .btn-messenger:hover {
+            transform: translateY(-5px) scale(1.03);
+            filter: brightness(1.1);
+        }
+
+        .btn-messenger:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* Уникальные оригинальные градиенты и тени */
+        .btn-telegram {
+            background: linear-gradient(135deg, #00b2ff 0%, #0077b5 100%);
+            box-shadow: 0 8px 25px rgba(0, 153, 255, 0.3);
+        }
+        .btn-telegram:hover {
+            box-shadow: 0 12px 30px rgba(0, 153, 255, 0.45);
+        }
+
+        .btn-viber {
+            background: linear-gradient(135deg, #8c52ff 0%, #5b32d6 100%);
+            box-shadow: 0 8px 25px rgba(115, 96, 242, 0.3);
+        }
+        .btn-viber:hover {
+            box-shadow: 0 12px 30px rgba(115, 96, 242, 0.45);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #00e676 0%, #00b0ff 0%, #00c853 100%);
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        .btn-whatsapp:hover {
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+        }
+
+        /* Основная кнопка */
         .btn {
             display: inline-block;
             padding: 16px 40px;
@@ -371,79 +432,55 @@
             box-shadow: var(--shadow-hover);
         }
 
-        .btn:active {
-            transform: translateY(-2px);
-        }
-
-        /* Разделитель "ИЛИ" */
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .divider span:not(.text) {
-            height: 1px;
-            background: rgba(104, 123, 62, 0.2);
-            flex: 1;
-            max-width: 150px;
-        }
-
-        .divider .text {
-            margin: 0 15px;
+        /* Футер */
+        footer {
+            background-color: rgba(104, 123, 62, 0.08);
+            border-top: 1px solid rgba(104, 123, 62, 0.15);
+            padding: 40px 20px;
+            text-align: center;
             color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
         }
 
-        /* Форма обратной связи */
-        .email-form {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px solid rgba(104, 123, 62, 0.15);
-            box-shadow: var(--shadow-soft);
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            text-align: left;
+            align-items: center;
+            gap: 15px;
         }
 
-        .email-form input, .email-form textarea {
-            width: 100%;
-            padding: 16px 20px;
-            border: 1px solid rgba(104, 123, 62, 0.2);
-            border-radius: 12px;
-            font-size: 1rem;
-            background: var(--bg-main);
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
             color: var(--text-dark);
-            transition: all 0.3s;
         }
 
-        .email-form input::placeholder, .email-form textarea::placeholder {
-            color: #9ca38f;
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .email-form input:focus, .email-form textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(104, 123, 62, 0.1);
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
         }
 
-        .email-form textarea {
-            resize: vertical;
-            min-height: 120px;
+        .footer-links a:hover {
+            color: var(--primary);
         }
 
-        /* =========================================
-           АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ
-           ========================================= */
+        .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Адаптивность */
         @media (max-width: 768px) {
-            /* Меню: прижимаем к левому краю, чтобы было видно, что можно свайпать */
             nav {
                 justify-content: flex-start;
                 padding: 0 15px;
@@ -455,7 +492,7 @@
             }
 
             nav a:last-child {
-                margin-right: 20px; /* Отступ в самом конце свайпа */
+                margin-right: 20px;
             }
 
             h1 { font-size: 2.5rem; }
@@ -476,8 +513,11 @@
             .story-container {
                 flex-direction: column;
             }
-            .email-form { padding: 30px; }
             .review-img { height: 280px; }
+            .buttons-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
@@ -493,11 +533,11 @@
         </nav>
     </header>
 
-        <section class="hero" id="about">
+    <section class="hero" id="about">
         <div class="hero-image"></div>
         <div class="hero-text">
             <h1>Заговори на <span class="primary-text">Английском</span><br> свободно</h1>
-            <h2>Привет! Я твой репетитор. Бла бла бла (Твое уникальное предложение: помогу преодолеть языковой барьер, подготовлю к экзаменам, сделаю английский частью твоей жизни).</h2>
+            <h2>Привет! Я твой репетитор. Помогу преодолеть языковой барьер, подготовлю к экзаменам и сделаю английский частью твоей жизни.</h2>
             <a href="#contact" class="btn">Записаться на урок</a>
         </div>
     </section>
@@ -525,18 +565,29 @@
 
         <div class="story-container">
             <div class="story-card">
-                <h3>Как проходят уроки</h3>
-                <p>Когда-то я сама знала всю грамматику на отлично, но впадала в ступор, когда нужно было заговорить. Стандартные методы заставляли зубрить, но не учили <strong>общаться</strong>.</p>
-                <p>Поэтому на моих уроках мы разрушаем языковой барьер с первого занятия. Мы обсуждаем современные темы, смотрим видео и делаем английский частью вашей жизни.</p>
+                <h3>Подход к урокам</h3>
+                <p>Хотите улучшить свой уровень английского языка и достичь своих целей? Хотите это делать в комфортной для вас обстановке? Тогда вы на правильном пути))
+                    Меня зовут Ирина Александровна. Предлагаю онлайн уроки в зуме. Я помогу вам начать говорить на английском языке свободно и уверенно, расширить ваш словарный запас, улучшить вашу грамматику и понимать английский на слух.
+                    У меня есть международный сертификат преподавания английского языка TEFL / TESOL, высшее лингвистическое образование (МГЛУ, теперь БГУИЯ)
+                    Языковая практика в США
+                    Опыт работы в преподавании более 15 лет (работа в нескольких гимназиях Минска, на языковых курсах, онлайн школах и частное онлайн преподавание более 5 лет)
+                    Регулярно прокачиваю свои преподавательские и языковые навыки.
+                    Работаю с детьми, подростками и взрослой аудиторией.
+                    Помогу поднять оценки в школе, а сильным ученикам помогу стать еще сильнее)
+                    Подготовлю к ЦТ
+                    Всегда учитываю пожелания и интересы студентов. На уроках будем работать по современным методикам и учебникам, а также использовать аутентичные материалы. Вы получите системные занятия с полноценным домашним заданием.
+                    Жду Вас на своих занятиях :)</p>
+
             </div>
 
             <div class="story-card">
                 <h3>Формат занятий и оплата</h3>
                 <ul>
-                    <li><strong>Пробный урок:</strong> 30 минут со скидкой 50%. Знакомимся, определяем ваш уровень и ставим цель.</li>
-                    <li><strong>Система абонементов:</strong> Оплата производится блоками по 4, 8 или 12 занятий. Чем больше пакет, тем выгоднее.</li>
-                    <li><strong>Гибкие отмены:</strong> Занятие можно перенести без потери средств, если предупредить за 12 часов до начала.</li>
-                    <li><strong>Всё включено:</strong> Платформа и авторские материалы уже входят в стоимость.</li>
+                    <li><strong>Длительность урока:</strong> 55 минут.</li>
+                    <li><strong>ЦТ:</strong> 55 рублей.</li>
+                    <li><strong>1-4 класс (уровень Starter – Elementary):</strong> 45 рублей, в паре - 30 рублей.</li>
+                    <li><strong>5-8 класс (уровень Elementary- Intermediate):</strong> 45 рублей, в паре - 30 рублей.</li>
+                    <li><strong>9- 11 класс (уровень Upper Intermediate – Low Advance):</strong> 50 рублей, в паре – 35 рублей.</li>
                 </ul>
             </div>
         </div>
@@ -585,73 +636,48 @@
         </div>
     </section>
 
+    <!-- СЕКЦИЯ КОНТАКТОВ С КРАСИВЫМИ ИКОНКАМИ -->
     <section class="contact" id="contact">
         <h2>Свяжитесь со мной</h2>
-        <p class="section-subtitle" style="margin-bottom: 25px;">
-            Выберите любой удобный способ: напишите в мессенджер или оставьте заявку прямо здесь. <strong>Они абсолютно равноценны — я отвечаю везде одинаково быстро!</strong>
-        </p>
-
+        <p class="section-subtitle">Выберите удобный мессенджер, чтобы записаться на урок или задать вопрос.</p>
         <div class="buttons-group">
-            <a href="https://t.me/Irina_mnk7" target="_blank" class="btn">Написать в Telegram</a>
-            <a href="viber://chat?number=%2B375295091568" target="_blank" class="btn">Написать в Viber</a>
-        </div>
+            <!-- Кнопка Telegram -->
+            <a href="https://t.me/Irina_mnk7" target="_blank" class="btn-messenger btn-telegram">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.535-.196 1.006.128.832.93z"/></svg>
+                Telegram
+            </a>
 
-        <div class="divider">
-            <span></span>
-            <span class="text">Или через почту</span>
-            <span></span>
-        </div>
+            <!-- Кнопка Viber -->
+            <a href="viber://chat?number=%2B375295091568" target="_blank" class="btn-messenger btn-viber">
+                <i class="fa-brands fa-viber" style="font-size: 24px; margin-right: 0.1px; line-height: 1;"></i>Viber
+            </a>
 
-        <form class="email-form" id="contactForm">
-            <input type="text" id="name" placeholder="Ваше имя" required>
-            <input type="tel" id="phone" placeholder="Ваш номер телефона" required>
-            <input type="email" id="email" placeholder="Ваш Email" required>
-            <textarea id="message" placeholder="Какой у вас уровень английского и главная цель?" required></textarea>
-            <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
-            <p id="statusMessage" style="display: none; margin-top: 15px; font-weight: bold; text-align: center;"></p>
-        </form>
+
+            <!-- Кнопка WhatsApp -->
+            <a href="https://wa.me/375295091568" target="_blank" class="btn-messenger btn-whatsapp">
+                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                WhatsApp
+            </a>
+        </div>
     </section>
 
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const statusMessage = document.getElementById('statusMessage');
-            const btn = e.target.querySelector('button');
 
-            const data = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">English Tutor — Ирина</div>
+            <div class="footer-links">
+                <a href="#about">Обо мне</a>
+                <a href="#education">Образование</a>
+                <a href="#rules">Условия</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            <div class="footer-copy">
+                &copy; 2026 Все права защищены. Профессиональный репетитор английского языка.
+            </div>
+        </div>
+    </footer>
 
-            btn.textContent = 'Отправка...';
-            btn.style.opacity = '0.7';
-
-            try {
-                const response = await fetch('/send-email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    statusMessage.style.display = 'block';
-                    statusMessage.style.color = '#687b3e';
-                    statusMessage.textContent = 'Заявка успешно отправлена! Я скоро с вами свяжусь.';
-                    e.target.reset();
-                } else {
-                    throw new Error('Ошибка сервера');
-                }
-            } catch (error) {
-                statusMessage.style.display = 'block';
-                statusMessage.style.color = '#ef4444';
-                statusMessage.textContent = 'Произошла ошибка связи. Пожалуйста, напишите мне в Telegram.';
-            } finally {
-                btn.textContent = 'Отправить заявку';
-                btn.style.opacity = '1';
-            }
-        });
-    </script>
 </body>
 </html>
