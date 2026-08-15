@@ -7,23 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* =========================================
-           Оливковая палитра (Спокойствие, рост, премиум)
+           Палитра "Dark Space" (Космос, неон, премиальный Dark Mode)
            ========================================= */
         :root {
-            --bg-main: #eff2e8;
-            --bg-card: #ffffff;
-            --primary: #687b3e;
-            --primary-gradient: linear-gradient(135deg, #687b3e 0%, #8a9e59 100%);
-            --text-dark: #2c3322;
-            --text-muted: #737a66;
+            --bg-main: #0B0C10; /* Глубокий космический черный */
+            --bg-card: #14161C; /* Темно-графитовый для карточек */
 
-            /* Эффект матового стекла */
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.5);
+            /* Космический акцент: от туманного фиолетового к ярко-синему */
+            --primary: #8B5CF6;
+            --primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
 
-            --shadow-soft: 0 10px 30px rgba(104, 123, 62, 0.1);
-            --shadow-hover: 0 20px 40px rgba(104, 123, 62, 0.2);
-            --shadow-btn: 0 8px 20px rgba(104, 123, 62, 0.25);
+            /* В темной теме основной текст должен быть светлым */
+            --text-dark: #F8FAFC; /* Звездный белый для заголовков и текста */
+            --text-muted: #94A3B8; /* Серо-синий для второстепенного текста */
+
+            /* Эффект темного матового стекла */
+            --glass-bg: rgba(11, 12, 16, 0.75);
+            --glass-border: rgba(139, 92, 246, 0.15); /* Едва заметная фиолетовая рамка */
+
+            /* Неоновые тени */
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.6);
+            --shadow-hover: 0 20px 40px rgba(139, 92, 246, 0.25); /* Фиолетовое свечение при наведении */
+            --shadow-btn: 0 8px 25px rgba(59, 130, 246, 0.35); /* Синее свечение кнопки */
         }
 
         * {
@@ -36,16 +41,21 @@
 
         body {
             background-color: var(--bg-main);
+            /* Туманности на фоне */
             background-image:
-                radial-gradient(at 0% 0%, rgba(104, 123, 62, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(138, 158, 89, 0.15) 0px, transparent 50%);
-            color: var(--text-dark);
+                radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 50%);
+            color: var(--text-dark); /* Теперь это светлый цвет */
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         .primary-text {
-            color: var(--primary);
+            /* Градиентный текст для главного акцента */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 900;
         }
 
@@ -62,12 +72,12 @@
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(104, 123, 62, 0.1);
+            border-bottom: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
         nav {
@@ -92,7 +102,7 @@
             font-weight: 600;
             margin: 0 15px;
             white-space: nowrap;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
             position: relative;
         }
 
@@ -103,12 +113,13 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background-color: var(--primary);
+            background: var(--primary-gradient);
             transition: width 0.3s;
         }
 
         nav a:hover {
-            color: var(--primary);
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
         }
 
         nav a:hover::after {
@@ -120,7 +131,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 75vh;
             max-width: 1200px;
             margin: 0 auto;
             padding: 90px 20px 20px;
@@ -135,11 +146,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 6px solid white;
+            border: 6px solid var(--bg-card); /* Заменил жесткий белый на цвет карточки */
             box-shadow: var(--shadow-soft);
-            background-image: url('/static/images/photo.jpg');
+            background-image: url('/static/images/photo.png');
             background-size: cover;
             background-position: center;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .hero-image:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(139, 92, 246, 0.3);
         }
 
         .hero-text {
@@ -153,10 +170,6 @@
             line-height: 1.1;
             color: var(--text-dark);
             font-weight: 800;
-        }
-
-        h1 span {
-            color: var(--primary);
         }
 
         h2 {
@@ -198,7 +211,7 @@
             background: var(--bg-card);
             height: 260px;
             border-radius: 20px;
-            border: 1px solid rgba(104, 123, 62, 0.15);
+            border: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -212,6 +225,8 @@
             height: 100%;
             object-fit: cover;
             border-radius: inherit;
+            opacity: 0.9; /* Легкое затемнение картинок для темной темы */
+            transition: opacity 0.3s ease;
         }
 
         .diploma-card:hover {
@@ -220,35 +235,52 @@
             border-color: var(--primary);
         }
 
-        /* История и Условия */
+        .diploma-card:hover img {
+            opacity: 1;
+        }
+
+                /* История и Условия */
         .story-container {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
             text-align: left;
+            align-items: flex-start; /* Отключаем уродливое растягивание пустоты */
         }
 
         .story-card {
             background: var(--bg-card);
-            flex: 1;
-            min-width: 320px;
-            padding: 35px;
+            padding: 40px; /* Чуть увеличил отступы для «воздуха» */
             border-radius: 24px;
-            border: 1px solid rgba(104, 123, 62, 0.15);
+            border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-soft);
             transition: all 0.4s ease;
+        }
+
+        /* Умные пропорции карточек */
+        .card-about {
+            flex: 1.7; /* Левая карточка шире */
+            min-width: 320px;
+        }
+
+        .card-price {
+            flex: 1; /* Правая карточка уже */
+            min-width: 320px;
+            position: sticky; /* Эффект прилипания при скролле */
+            top: 100px;
         }
 
         .story-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
+            border-color: rgba(139, 92, 246, 0.4);
         }
 
         .story-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            color: #A78BFA;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
             font-weight: 700;
         }
 
@@ -263,22 +295,29 @@
             list-style-type: none;
             padding: 0;
             font-size: 1.05rem;
+            margin-bottom: 20px;
         }
 
         .story-card ul li {
             margin-bottom: 15px;
-            padding-left: 30px;
+            padding-left: 35px;
             position: relative;
         }
 
         .story-card ul li::before {
             content: '✓';
-            color: var(--primary);
+            color: #A78BFA;
             position: absolute;
             left: 0;
             font-weight: bold;
             font-size: 1.2rem;
+            text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
         }
+
+        .story-card strong {
+            color: var(--text-dark);
+        }
+
 
         /* Отзывы */
         .reviews {
@@ -293,6 +332,7 @@
             display: flex;
             align-items: center;
             padding: 20px 0;
+            /* Маска прозрачности работает одинаково в светлой и темной теме */
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
@@ -318,16 +358,19 @@
             width: auto;
             border-radius: 16px;
             box-shadow: var(--shadow-soft);
-            border: 1px solid rgba(104, 123, 62, 0.15);
+            border: 1px solid var(--glass-border);
             object-fit: contain;
             background-color: var(--bg-card);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            opacity: 0.9;
         }
 
         .review-img:hover {
             transform: scale(1.02);
             box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+            opacity: 1;
         }
 
         /* Контакты */
@@ -345,7 +388,7 @@
         }
 
         /* =========================================
-           ПРЕМИАЛЬНЫЕ КНОПКИ МЕССЕНДЖЕРОВ С ИКОНКАМИ
+           ПРЕМИАЛЬНЫЕ КНОПКИ МЕССЕНДЖЕРОВ
            ========================================= */
         .btn-messenger {
             display: inline-flex;
@@ -367,47 +410,45 @@
         .btn-messenger svg {
             width: 22px;
             height: 22px;
-            min-width: 22px;    /* Жестко фиксируем ширину */
-            min-height: 22px;   /* Жестко фиксируем высоту */
-            flex-shrink: 0;     /* Запрещаем браузеру сплющивать иконку */
+            min-width: 22px;
+            min-height: 22px;
+            flex-shrink: 0;
             fill: #ffffff;
             transition: transform 0.3s ease;
         }
 
-
         .btn-messenger:hover {
             transform: translateY(-5px) scale(1.03);
-            filter: brightness(1.1);
+            filter: brightness(1.2);
         }
 
         .btn-messenger:hover svg {
             transform: scale(1.1);
         }
 
-        /* Уникальные оригинальные градиенты и тени */
+        /* Тени кнопок адаптированы для темной темы */
         .btn-telegram {
             background: linear-gradient(135deg, #00b2ff 0%, #0077b5 100%);
-            box-shadow: 0 8px 25px rgba(0, 153, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 153, 255, 0.2);
         }
         .btn-telegram:hover {
-            box-shadow: 0 12px 30px rgba(0, 153, 255, 0.45);
+            box-shadow: 0 12px 30px rgba(0, 153, 255, 0.5);
         }
 
         .btn-viber {
             background: linear-gradient(135deg, #8c52ff 0%, #5b32d6 100%);
-            box-shadow: 0 8px 25px rgba(115, 96, 242, 0.3);
+            box-shadow: 0 8px 25px rgba(115, 96, 242, 0.2);
         }
         .btn-viber:hover {
-            box-shadow: 0 12px 30px rgba(115, 96, 242, 0.45);
+            box-shadow: 0 12px 30px rgba(115, 96, 242, 0.5);
         }
 
         .btn-whatsapp {
-            background: linear-gradient(135deg, #00e676 0%, #00b0ff 0%, #00c853 100%);
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
         }
         .btn-whatsapp:hover {
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.45);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.5);
         }
 
         /* Основная кнопка */
@@ -430,12 +471,13 @@
         .btn:hover {
             transform: translateY(-6px) scale(1.02);
             box-shadow: var(--shadow-hover);
+            color: #ffffff;
         }
 
         /* Футер */
         footer {
-            background-color: rgba(104, 123, 62, 0.08);
-            border-top: 1px solid rgba(104, 123, 62, 0.15);
+            background-color: #08090C; /* Темнее основного фона */
+            border-top: 1px solid var(--glass-border);
             padding: 40px 20px;
             text-align: center;
             color: var(--text-muted);
@@ -471,7 +513,7 @@
         }
 
         .footer-links a:hover {
-            color: var(--primary);
+            color: #A78BFA;
         }
 
         .footer-copy {
@@ -536,7 +578,7 @@
     <section class="hero" id="about">
         <div class="hero-image"></div>
         <div class="hero-text">
-            <h1>Заговори на <span class="primary-text">Английском</span><br> свободно</h1>
+            <h1>Начни<span class="primary-text"> ДУМАТЬ</span><br> И <span class="primary-text">ГОВОРИТЬ</span><br> На <span class="primary-text">АНГЛИЙСКОМ</span> Свободно</h1>
             <h2>Привет! Я твой репетитор. Помогу преодолеть языковой барьер, подготовлю к экзаменам и сделаю английский частью твоей жизни.</h2>
             <a href="#contact" class="btn">Записаться на урок</a>
         </div>
@@ -548,46 +590,57 @@
 
         <div class="diplomas-grid">
             <div class="diploma-card">
-                <img src="/static/images/diploma1.jpg" alt="Диплом 1">
+                <img src="/static/images/diploma1.png" alt="Диплом 1">
             </div>
             <div class="diploma-card">
-                <img src="/static/images/diploma2.jpg" alt="Диплом 2">
+                <img src="/static/images/diploma2.png" alt="Диплом 2">
             </div>
             <div class="diploma-card">
-                <img src="/static/images/diploma3.jpg" alt="Диплом 3">
+                <img src="/static/images/diploma3.png" alt="Диплом 3">
             </div>
         </div>
     </section>
 
-    <section class="story-section" id="rules">
+        <section class="story-section" id="rules">
         <h2>Мой подход и условия</h2>
-        <p class="section-subtitle">Всё прозрачно и нацелено на ваш результат.</p>
+        <h3 class="section-subtitle">Dream it, Believe it, Achieve it!</h3>
 
         <div class="story-container">
-            <div class="story-card">
+            <!-- Левая карточка (Текст) -->
+            <div class="story-card card-about">
                 <h3>Подход к урокам</h3>
-                <p>Хотите улучшить свой уровень английского языка и достичь своих целей? Хотите это делать в комфортной для вас обстановке? Тогда вы на правильном пути))
-                    Меня зовут Ирина Александровна. Предлагаю онлайн уроки в зуме. Я помогу вам начать говорить на английском языке свободно и уверенно, расширить ваш словарный запас, улучшить вашу грамматику и понимать английский на слух.
-                    У меня есть международный сертификат преподавания английского языка TEFL / TESOL, высшее лингвистическое образование (МГЛУ, теперь БГУИЯ)
-                    Языковая практика в США
-                    Опыт работы в преподавании более 15 лет (работа в нескольких гимназиях Минска, на языковых курсах, онлайн школах и частное онлайн преподавание более 5 лет)
-                    Регулярно прокачиваю свои преподавательские и языковые навыки.
-                    Работаю с детьми, подростками и взрослой аудиторией.
-                    Помогу поднять оценки в школе, а сильным ученикам помогу стать еще сильнее)
-                    Подготовлю к ЦТ
-                    Всегда учитываю пожелания и интересы студентов. На уроках будем работать по современным методикам и учебникам, а также использовать аутентичные материалы. Вы получите системные занятия с полноценным домашним заданием.
-                    Жду Вас на своих занятиях :)</p>
 
+                <p><strong>Хотите улучшить свой уровень английского языка и достичь своих целей? Хотите это делать в комфортной для вас обстановке? Тогда вы на правильном пути))</strong></p>
+
+                <p>Меня зовут <strong>Ирина Александровна</strong>. Предлагаю онлайн уроки в зуме. Работаю с детьми, подростками и взрослой аудиторией.</p>
+
+                <ul>
+                    <li>Помогу поднять оценки в школе, а сильным ученикам помогу стать еще сильнее)</li>
+                    <li>Подготовлю к <strong>ЦТ</strong></li>
+                    <li>Всегда учитываю пожелания и интересы студентов.</li>
+                    <li>Вы получите системные занятия с полноценным домашним заданием.</li>
+                </ul>
+
+                <ul>
+                    <li>У меня есть международный сертификат преподавания английского языка <strong>TEFL / TESOL</strong></li>
+                    <li>Высшее лингвистическое образование (МГЛУ, теперь <strong>БГУИЯ</strong>)</li>
+                    <li>Языковая практика в <strong>США</strong></li>
+                    <li>Опыт работы в преподавании <strong>более 15 лет</strong></li>
+                    <li>Регулярно прокачиваю свои преподавательские и языковые навыки.</li>
+                </ul>
+
+                <p style="margin-bottom: 0;"><strong>Жду Вас на своих занятиях :)</strong></p>
             </div>
 
-            <div class="story-card">
+            <!-- Правая карточка (Цены) -->
+            <div class="story-card card-price">
                 <h3>Формат занятий и оплата</h3>
                 <ul>
                     <li><strong>Длительность урока:</strong> 55 минут.</li>
                     <li><strong>ЦТ:</strong> 55 рублей.</li>
-                    <li><strong>1-4 класс (уровень Starter – Elementary):</strong> 45 рублей, в паре - 30 рублей.</li>
-                    <li><strong>5-8 класс (уровень Elementary- Intermediate):</strong> 45 рублей, в паре - 30 рублей.</li>
-                    <li><strong>9- 11 класс (уровень Upper Intermediate – Low Advance):</strong> 50 рублей, в паре – 35 рублей.</li>
+                    <li><strong>1-4 класс (Starter – Elementary):</strong><br> 45 рублей, в паре - 30 рублей.</li>
+                    <li><strong>5-8 класс (Elementary - Intermediate):</strong><br> 45 рублей, в паре - 30 рублей.</li>
+                    <li><strong>9-11 класс (Upper Int. – Low Adv.):</strong><br> 50 рублей, в паре – 35 рублей.</li>
                 </ul>
             </div>
         </div>
@@ -600,38 +653,23 @@
         <div class="marquee-container">
             <div class="marquee-track">
                 <!-- ПЕРВЫЙ БЛОК -->
-                <img src="/static/images/review1.jpg" alt="Отзыв 1" class="review-img">
-                <img src="/static/images/review2.jpg" alt="Отзыв 2" class="review-img">
-                <img src="/static/images/review3.jpg" alt="Отзыв 3" class="review-img">
-                <img src="/static/images/review4.jpg" alt="Отзыв 4" class="review-img">
-                <img src="/static/images/review5.jpg" alt="Отзыв 5" class="review-img">
-                <img src="/static/images/review6.jpg" alt="Отзыв 6" class="review-img">
-                <img src="/static/images/review7.jpg" alt="Отзыв 7" class="review-img">
-                <img src="/static/images/review8.jpg" alt="Отзыв 8" class="review-img">
-                <img src="/static/images/review9.jpg" alt="Отзыв 9" class="review-img">
-                <img src="/static/images/review10.jpg" alt="Отзыв 10" class="review-img">
-                <img src="/static/images/review11.jpg" alt="Отзыв 11" class="review-img">
-                <img src="/static/images/review12.jpg" alt="Отзыв 12" class="review-img">
-                <img src="/static/images/review13.jpg" alt="Отзыв 13" class="review-img">
-                <img src="/static/images/review14.jpg" alt="Отзыв 14" class="review-img">
-                <img src="/static/images/review15.jpg" alt="Отзыв 15" class="review-img">
+                <img src="/static/images/review1.png" alt="Отзыв 1" class="review-img">
+                <img src="/static/images/review5.png" alt="Отзыв 2" class="review-img">
+                <img src="/static/images/review3.png" alt="Отзыв 3" class="review-img">
+                <img src="/static/images/review4.png" alt="Отзыв 4" class="review-img">
+                <img src="/static/images/review5.png" alt="Отзыв 5" class="review-img">
+                <img src="/static/images/review6.png" alt="Отзыв 6" class="review-img">
+                <img src="/static/images/review7.png" alt="Отзыв 7" class="review-img">
 
                 <!-- ДУБЛИКАТ БЛОКА -->
-                <img src="/static/images/review1.jpg" alt="Отзыв 1" class="review-img">
-                <img src="/static/images/review2.jpg" alt="Отзыв 2" class="review-img">
-                <img src="/static/images/review3.jpg" alt="Отзыв 3" class="review-img">
-                <img src="/static/images/review4.jpg" alt="Отзыв 4" class="review-img">
-                <img src="/static/images/review5.jpg" alt="Отзыв 5" class="review-img">
-                <img src="/static/images/review6.jpg" alt="Отзыв 6" class="review-img">
-                <img src="/static/images/review7.jpg" alt="Отзыв 7" class="review-img">
-                <img src="/static/images/review8.jpg" alt="Отзыв 8" class="review-img">
-                <img src="/static/images/review9.jpg" alt="Отзыв 9" class="review-img">
-                <img src="/static/images/review10.jpg" alt="Отзыв 10" class="review-img">
-                <img src="/static/images/review11.jpg" alt="Отзыв 11" class="review-img">
-                <img src="/static/images/review12.jpg" alt="Отзыв 12" class="review-img">
-                <img src="/static/images/review13.jpg" alt="Отзыв 13" class="review-img">
-                <img src="/static/images/review14.jpg" alt="Отзыв 14" class="review-img">
-                <img src="/static/images/review15.jpg" alt="Отзыв 15" class="review-img">
+                <img src="/static/images/review1.png" alt="Отзыв 1" class="review-img">
+                <img src="/static/images/review5.png" alt="Отзыв 2" class="review-img">
+                <img src="/static/images/review3.png" alt="Отзыв 3" class="review-img">
+                <img src="/static/images/review4.png" alt="Отзыв 4" class="review-img">
+                <img src="/static/images/review5.png" alt="Отзыв 5" class="review-img">
+                <img src="/static/images/review6.png" alt="Отзыв 6" class="review-img">
+                <img src="/static/images/review7.png" alt="Отзыв 7" class="review-img">
+
             </div>
         </div>
     </section>
@@ -652,7 +690,6 @@
                 <i class="fa-brands fa-viber" style="font-size: 24px; margin-right: 0.1px; line-height: 1;"></i>Viber
             </a>
 
-
             <!-- Кнопка WhatsApp -->
             <a href="https://wa.me/375295091568" target="_blank" class="btn-messenger btn-whatsapp">
                 <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -660,7 +697,6 @@
             </a>
         </div>
     </section>
-
 
     <!-- Футер -->
     <footer>
